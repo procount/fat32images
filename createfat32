@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#set -x 
+
+size=$1
+
+image=noobs${size}gb.img
+zippedimage=noobs${size}gb.img.zip
+
+rm $image
+rm $zippedimage
+fallocate -l ${size}G $image
+fdisk $image << EOF
+n
+p
+1
+8192
+
+t
+c
+w
+EOF
+
+l=$(sudo losetup -f)
+echo $l
+
+sudo losetup $l -o 4194304 $image
+sudo mkfs.vfat $l -n RECOVERY
+sleep 1
+sudo losetup -d $l
+sleep 1
+zip $zippedimage $image
+rm $image

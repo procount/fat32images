@@ -9,3 +9,5 @@ This is particularly useful for creating FAT32 partitions on SD cards >32GB in s
 formatted as a whole, due to their size.
 
 Once formatted in this way, such large SD cards are suitable for copying NOOBS files to for the Raspberry Pi.
+
+The `createfat32` files is a linux bash script that is used to create the images. It is passed a single parameter which specifies the size of the image to be created in GBs.
